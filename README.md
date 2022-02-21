@@ -12,7 +12,7 @@ The following information is required to use these scripts:
     - `OS_APPLICATION_CREDENTIAL_SECRET=ApplicationSecret`
 - OpenStack CLI Configuration (for using Application Credentials)
     - `OS_AUTH_URL=KeystoneURL`
-    - `OS_AUTH_TYPE=v3applicationcredential`
+    - `OS_AUTH_TYPE=v3applicationcredential` (note: `v3applicationcredential` is the literal value of this field)
     - `OS_IDENTITY_API_VERSION=3`
 
 All variables above should be exported to the environment the script is being run from.
