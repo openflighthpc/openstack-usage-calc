@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains a collection of scripts for identifying usage & billing information for an OpenStack project. Providing the initial proof-of-concept for integration with [flight control](/openflighthpc/flight-control).
+This repository contains a collection of scripts for identifying usage & billing information for an OpenStack project. Providing the initial proof-of-concept for integration with [flight control](https://github.com/openflighthpc/flight-control).
 
 ## Input Data
 
