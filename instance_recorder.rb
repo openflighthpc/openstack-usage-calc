@@ -5,8 +5,6 @@ require 'json'
 require 'date'
 require 'time'
 
-node = 'cgw1'
-
 # Import yaml as hash
 cmd_out = `bash usage.sh`
 data = YAML.load(cmd_out)
