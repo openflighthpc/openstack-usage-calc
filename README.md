@@ -4,7 +4,9 @@
 
 This repository contains a collection of scripts for identifying usage & billing information for an OpenStack project. Providing the initial proof-of-concept for integration with [flight control](https://github.com/openflighthpc/flight-control).
 
-## Input Data
+## Instance Usage Reporting
+
+### Input Data
 
 The following information is required to use these scripts:
 - [Application Credentials](https://docs.openstack.org/keystone/xena/user/application_credentials.html)
@@ -17,7 +19,7 @@ The following information is required to use these scripts:
 
 All variables above should be exported to the environment the script is being run from.
 
-## Output
+### Output
 
 The output of `instance_recorder.rb` is formatted as follows:
 ```json
@@ -37,4 +39,6 @@ The output of `instance_recorder.rb` is formatted as follows:
 ## Notes
 
 - The `instance_record.rb` script identifies daily uptime by calculating it from power events. For this reason, the script can only provide data from the initial creation of each node until today and is unable to reduce query/calculation time by only doing it for a specific date or range.
+- Instance details can be queried in OpenStack with `openstack flavor list -f json`, prices will then need to be manually added
+- Storage cost calculation will require manually setting price-per-gb
 
