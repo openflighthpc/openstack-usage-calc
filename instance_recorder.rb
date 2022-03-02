@@ -6,7 +6,8 @@ require 'date'
 require 'time'
 
 # Import yaml as hash
-cmd_out = `bash usage.sh`
+project = ARGV[0]
+cmd_out = `bash usage.sh #{project}`
 data = YAML.load(cmd_out)
 
 time = Time.new
