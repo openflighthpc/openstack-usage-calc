@@ -1,3 +1,8 @@
+export OS_AUTH_TYPE=v3applicationcredential
+export OS_AUTH_IDENTITY_API_VERSION=3
+set -a
+source project/$1
+set +a
 NODES=$(openstack server list -f csv -c Name --quote none |tail -n +2)
 
 for node in $NODES ; do
