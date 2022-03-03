@@ -15,6 +15,7 @@ today = time.strftime("%Y-%m-%d")
 daily_usage = {}
 daily_usage.default_proc = proc { '' } # This allows for += to a key that doesn't exist
 
+# Node uptime/usage calculation
 data.each do |node, data|
   all_datetimes = data.keys
 
@@ -83,5 +84,26 @@ data.each do |node, data|
   end
 end
 
+# Disk Usage
+nodedisks_out = `bash disk_usage.sh #{project}`
+nodedisks = YAML.load(nodedisks_out)
+
+nodedisks.each do |node, data|
+  data.each do |date, info|
+    today = Time.now.strftime("%Y-%m-%d")
+    day = info['date'].to_s
+    diskkey = "#{node}volume#{info['id']}"
+    while day != today do 
+      #daily_usage[day][diskkey.to_s] = {"id" => node, "usage" => info["usage"], "type" => info["type"], "usage_type" => info["usage_type"], "tags" => info["tags"]}
+      daily_usage[day][diskkey] = info
+      daily_usage[day][diskkey]['node'] = node
+      day = (Date.parse(day) + 1).strftime("%Y-%m-%d")
+    end
+    daily_usage[day][diskkey] = info
+    daily_usage[day][diskkey]['node'] = node
+  end
+end
+
+# Return the info
 puts daily_usage.to_json
 
