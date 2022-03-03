@@ -17,7 +17,7 @@ The following information is required to use these scripts:
     - `OS_AUTH_TYPE=v3applicationcredential` (note: `v3applicationcredential` is the literal value of this field)
     - `OS_IDENTITY_API_VERSION=3`
 
-All variables above should be exported to the environment the script is being run from.
+Create a config file to contain the CLI configuration variables underneath the `project/` directory. The name of this file will be the project argument to the `instance_recorder.rb` script.
 
 ### Output
 
@@ -35,6 +35,21 @@ The output of `instance_recorder.rb` is formatted as follows:
     }
 }
 ```
+
+## Instance Status
+
+### Input
+
+The command requires the project config file name and the node name:
+```shell
+bash status.sh MyProject cnode01
+```
+
+### Output
+
+Returns one of the following:
+- `ACTIVE`: Node is up
+- `SHUTOFF`: Node is off
 
 ## Notes
 

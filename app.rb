@@ -12,4 +12,10 @@ class App < Sinatra::Base
       `ruby instance_recorder.rb #{prj}`
     end
   end
+
+  get '/status/:project/:node' do
+    prj = params[:project]
+    node = params[:node]
+
+    `bash status.sh #{prj} #{node}`
 end
