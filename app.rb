@@ -18,4 +18,5 @@ class App < Sinatra::Base
     node = params[:node]
 
     `bash status.sh #{prj} #{node}`
+  end
 end
