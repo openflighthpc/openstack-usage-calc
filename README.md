@@ -50,6 +50,7 @@ bash status.sh MyProject cnode01
 Returns one of the following:
 - `ACTIVE`: Node is up
 - `SHUTOFF`: Node is off
+- `NODE NOT FOUND`: No such node found in project
 
 ## Notes
 
