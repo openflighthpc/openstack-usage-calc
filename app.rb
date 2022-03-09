@@ -26,4 +26,18 @@ class App < Sinatra::Base
 
     `bash instance_monitor.sh #{prj} #{node}`
   end
+
+  get '/on/:project/:node' do
+    prj = params[:project]
+    node = params[:node]
+
+    `bash on.sh #{prj} #{node}`
+  end
+
+  get '/off/:project/:node' do
+    prj = params[:project]
+    node = params[:node]
+
+    `bash off.sh #{prj} #{node}`
+  end
 end
