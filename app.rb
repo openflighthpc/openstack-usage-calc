@@ -25,4 +25,5 @@ class App < Sinatra::Base
     node = params[:node]
 
     `bash instance_monitor.sh #{prj} #{node}`
+  end
 end
