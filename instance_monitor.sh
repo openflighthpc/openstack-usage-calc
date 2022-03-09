@@ -21,7 +21,7 @@ ID=$(openstack server show $node -c id -f value)
 ## Ref: https://stackoverflow.com/questions/56216683/openstack-get-vm-cpu-util-with-stein-version
 TWENTYMINSAGO=$(date -d '21 minutes ago' '+%FT%T')
 
-LOADPERCENTAGES=$(gnocchi aggregates --start $TWENTYMINSAGO --granularity 60 '(* (/ (aggregate rate:mean (metric cpu mean)) 60000000000) 100)' id=$ID |tail -n +2)
+LOADPERCENTAGES=$(gnocchi aggregates -f csv -c value --start $TWENTYMINSAGO --granularity 60 '(* (/ (aggregate rate:mean (metric cpu mean)) 60000000000) 100)' id=$ID |tail -n +2)
 COUNT=$(echo "$LOADPERCENTAGES" |wc -l)
 
 if [[ $COUNT < 20 ]] ; then
