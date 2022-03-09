@@ -19,4 +19,10 @@ class App < Sinatra::Base
 
     `bash status.sh #{prj} #{node}`
   end
+
+  get '/monitor/:project/:node' do
+    prj = params[:project]
+    node = params[:node]
+
+    `bash instance_monitor.sh #{prj} #{node}`
 end
