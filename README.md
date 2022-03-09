@@ -4,6 +4,9 @@
 
 This repository contains a collection of scripts for identifying usage & billing information for an OpenStack project. Providing the initial proof-of-concept for integration with [flight control](https://github.com/openflighthpc/flight-control).
 
+You'll likely need the following additional OpenStack CLI packages (install with `pip`):
+- `gnocchiclient`
+
 ## Instance Usage Reporting
 
 ### Input Data
@@ -51,6 +54,36 @@ Returns one of the following:
 - `ACTIVE`: Node is up
 - `SHUTOFF`: Node is off
 - `NODE NOT FOUND`: No such node found in project
+
+## Instance Monitoring
+
+Reference for monitoring with gnocchi - https://stackoverflow.com/a/57386023
+
+### Prerequisites
+
+- Gnocchi/Telemetry Enabled
+- CPU Metric Changes (in `/etc/ceilometer/gnocchi_resources.yaml`)
+    - Set `archive_policy_name` to `ceilometer-rate-high` (this will enable 60s granularity and max aggregation)
+
+_**Note: The above needs to be true before instance creation**_
+
+To verify that metrics are working as expecting for an instance:
+```shell
+gnocchi measures show --resource-id=$(openstack server show $NODENAME -c id -f value) cpu --granularity 60 --aggregation rate:mean
+```
+
+### Input
+
+The command requires the project config file name and the node name:
+```shell
+bash instance_monitor.sh MyProject cnode01
+```
+
+### Output
+
+This returns the average usage over the last 20 minutes as a percentage of overall CPU to 2 decimal places.
+
+In the event that there are less than 20 data points (e.g. the node has been up for less than 20 minutes) then it will return 100 to ensure node stays up.
 
 ## Notes
 
