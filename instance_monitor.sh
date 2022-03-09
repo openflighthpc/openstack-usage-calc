@@ -19,7 +19,6 @@ ID=$(openstack server show $node -c id -f value)
 ## Divided by "Granularity in Nanoseconds" (e.g. 60s = 60000000000, 300s = 300000000000) 
 ## Divided by 100 for percentage
 ## Ref: https://stackoverflow.com/questions/56216683/openstack-get-vm-cpu-util-with-stein-version
-TWENTYMINSAGO=$(date -d '20 minutes ago')
-NOW=$(date)
+TWENTYMINSAGO=$(date -d '20 minutes ago' '+%FT%T')
 
-gnocchi aggregates --start $TWENTYMINSAGO --end $NOW --granularity 60 '(* (/ (aggregate rate:mean (metric cpu mean)) 60000000000) 100)' id=$ID
+gnocchi aggregates --start $TWENTYMINSAGO --granularity 60 '(* (/ (aggregate rate:mean (metric cpu mean)) 60000000000) 100)' id=$ID
