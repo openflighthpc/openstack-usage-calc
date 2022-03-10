@@ -10,7 +10,7 @@
   rackup -o 0.0.0.0
   ```
 
-## Usage
+## Setup (OpenStack Credentials)
 
 - Create an auth script for the project
 ```
@@ -21,8 +21,30 @@ OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
 EOF
 ```
 
-- Call API server for usage 
+## Usage
+
+- Get usage for VMs and disks in a project
 ```
 curl http://$IP:$PORT/usage/$PROJECT
+```
+
+- Get instance power status
+```
+curl http://$IP:$PORT/status/$PROJECT/$NODE
+```
+
+- Turn instance on
+```
+curl http://$IP:$PORT/on/$PROJECT/$NODE
+```
+
+- Turn instance off
+```
+curl http://$IP:$PORT/off/$PROJECT/$NODE
+```
+
+- Get CPU utilisation percentage for the last 20 minutes 
+```
+curl http://$IP:$PORT/monitor/$PROJECT/$NODE
 ```
 
